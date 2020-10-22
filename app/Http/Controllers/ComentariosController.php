@@ -96,4 +96,35 @@ class ComentariosController extends Controller
         return response()->json('delete',200);
 
     }
+    public function consulPerson(int $persona_id, int $id ){
+        return response()->json([
+            'Persona'=>( $id==null)? 
+            Comentarios::where('persona_id', $persona_id)->get():
+            Comentarios::where('persona_id', $persona_id)->where('id',$id)->get()
+        ],200);
+    }
+
+    public function comentPubli(int $publicacion_id, int $id){
+        return response()->json([
+         'Respuesta'=>($id==null)?
+         Comentarios::where('publicacion_id', $publicacion_id)->get():
+         Comentarios::where('publicacion_id', $publicacion_id)->where('id', $id)->get()
+        ], 200);
+
+    }
+    public function personPubliComent(int $persona_id, int $publicacion_id, int $id = NULL){
+        return response()->json([
+         'Respuesta'=>($id==null)?
+         Comentarios::where('persona_id', $persona_id)->where('publicacion_id', $publicacion_id)->get():
+         Comentarios::where('persona_id', $persona_id)->where('publicacion_id', $publicacion_id)->where('id', $id)->get()
+        ], 200);
+
+    }
+    public function showalll(){
+       return response()->json([
+           'Respuesta' => DB::table('Comentarios')->join('publicaciones', 'publicaciones.id','=','comentarios.publicacion_id')->join('personas', 'personas.id', '=' , 'comentarios.persona_id')->select('comentarios.', 'publicaciones.', 'personas.*')->get()
+
+       ], 200); 
+    }
+
 }

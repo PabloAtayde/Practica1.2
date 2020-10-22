@@ -18,6 +18,7 @@ class CreateComentariosTable extends Migration
             $table->text('titulo');
             $table->text('cuerpo');
             $table->foreignId('publicacion_id')->references('id')->on('publicaciones');
+            $table->foreignId('persona_id')->references('id')->on('personas');
             $table->timestamps();
         });
     }

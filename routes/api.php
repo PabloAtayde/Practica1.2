@@ -42,3 +42,9 @@ Route::get('comentariosregistro/{titulo?}/{cuerpo?}/{publicacion_id?}','Comentar
 Route::put('comentarios/updatetitulo/{id}/{titulo}','ComentariosController@updatetitulo')->where(['id','[0-9]+',
 'titulo','[A-z]+']);
 Route::delete('comentarios/delete/{id}','ComentariosController@destroy');
+Route::get('persona/{persona_id}/comentario/{id?}','ComentariosController@consulPerson')
+->where( ['id','[0-9]+','persona_id','[0-9]+']);
+Route::get('publicacion/{publicacion_id}/comentario/{id?}','ComentariosController@comentPubli')
+->where( ['id','[0-9]+','publicacion_id','[0-9]+']);
+Route::get('personas/{persona_id}/publicaciones/{publicacion_id}/comentarios/{id?}', 'ComentariosController@personPubliComent')->where( ['publicacion_id','[0-9]+','id','[0-9]+','persona_id','[0-9]+']);
+Route::get('comentarios/publicaciones/personas', 'ComentariosController@showalll');
