@@ -9,6 +9,6 @@ $factory->define(Publicaciones::class, function (Faker $faker) {
     return [
         'titulo'=>$faker->text(20),
         'cuerpo'=>$faker->text(60),
-        'persona_id'=>$faker->numberbetween(1,10),
+        'usuario_id'=>$faker->numberbetween(1,10),
     ];
 });

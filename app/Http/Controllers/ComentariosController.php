@@ -104,7 +104,7 @@ class ComentariosController extends Controller
         ],200);
     }
 
-    public function comentPubli(int $publicacion_id, int $id){
+    public function comentPubli(int $publicacion_id, int $id = NULL){
         return response()->json([
          'Respuesta'=>($id==null)?
          Comentarios::where('publicacion_id', $publicacion_id)->get():
@@ -122,7 +122,9 @@ class ComentariosController extends Controller
     }
     public function showalll(){
        return response()->json([
-           'Respuesta' => DB::table('Comentarios')->join('publicaciones', 'publicaciones.id','=','comentarios.publicacion_id')->join('personas', 'personas.id', '=' , 'comentarios.persona_id')->select('comentarios.', 'publicaciones.', 'personas.*')->get()
+           'Respuesta' => DB::table('Comentarios')->join('publicaciones', 'publicaciones.id','=','comentarios.publicacion_id')
+           ->join('personas', 'personas.id', '=' , 'comentarios.persona_id')
+           ->select('comentarios.', 'publicaciones.', 'personas.*')->get()
 
        ], 200); 
     }

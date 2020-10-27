@@ -17,7 +17,7 @@ class CreatePublicacionesTable extends Migration
             $table->id();
             $table->text('titulo');
             $table->text('cuerpo');
-            $table->foreignId('persona_id')->references('id')->on('personas');
+            $table->foreignId('usuario_id')->references('id')->on('usuarios');
             $table->timestamps();
         });
     }

@@ -2,28 +2,19 @@
 
 namespace App\Http\Controllers;
 
-use App\Personas;
+use App\Usuarios;
 use Illuminate\Http\Request;
 
-class PersonasController extends Controller
+class UsuariosController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request){
-
-        $newinfo = new \App\Personas;
-
-        $newinfo->nombre = $request->nombre;
-        $newinfo->apellido = $request->apellido;
-        $newinfo->edad = $request ->edad;
-        $newinfo->sexo = $request->sexo;
-
-
-        $newinfo->save();
-        return response()->json('Finalizado', 200);
+    public function index()
+    {
+        //
     }
 
     /**
@@ -50,22 +41,21 @@ class PersonasController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Personas  $personas
+     * @param  \App\Usuarios  $usuarios
      * @return \Illuminate\Http\Response
      */
-    public function show(Personas $personas, int $id=0)
+    public function show(Usuarios $usuarios)
     {
-        $personas = ($id==0)? Personas::all():Personas::find($id);
-        return response()->json($personas, 200);
+        //
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Personas  $personas
+     * @param  \App\Usuarios  $usuarios
      * @return \Illuminate\Http\Response
      */
-    public function edit(Personas $personas)
+    public function edit(Usuarios $usuarios)
     {
         //
     }
@@ -74,27 +64,22 @@ class PersonasController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Personas  $personas
+     * @param  \App\Usuarios  $usuarios
      * @return \Illuminate\Http\Response
      */
-    public function updatenombre(int $id,string $nombre)
+    public function update(Request $request, Usuarios $usuarios)
     {
-        $update= Personas::find($id);
-        $update->nombre=$nombre;
-        $update->save();
-        return response()->json(["Update Finish"=>Personas::find($update->id)],200);
+        //
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Personas  $personas
+     * @param  \App\Usuarios  $usuarios
      * @return \Illuminate\Http\Response
      */
-    public function destroy(int $id)
+    public function destroy(Usuarios $usuarios)
     {
-        Personas::destroy($id);
-        return response()->json('delete',200);
-
+        //
     }
 }

@@ -15,12 +15,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('personas/{id?}','PersonasController@show')->where('id','[0-9]+')->name('ruta');
-Route::get('personaRegistro/{nombre?}/{apellido?}/{edad?}/{sexo?}','PersonasController@index')
-->where([
-'nombre'=>'[A-Z,a-z]+',
-'apellido'=>'[A-Z,a-z]+',
-'edad'=>'[0-9]+',
-'sexo'=>'[A-Z,a-z]+']);
+Route::get('personaRegistro','PersonasController@index')->middleware('check.edad');
 Route::put('persona/updatenombre/{id}/{nombre}','PersonasController@updatenombre')->where(['id','[0-9]+',
 'nombre','[A-z]+']);
 Route::delete('persona/delete/{id}','PersonasController@destroy');
