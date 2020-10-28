@@ -14,7 +14,15 @@ class UsuariosController extends Controller
      */
     public function index()
     {
-        //
+        $newinfo = new Usuarios;
+        $newinfo->nickname = $nickname;
+        $newinfo->password = $password;
+        $newinfo->email = $email;
+        $newinfo->persona_id = $persona_id;
+        
+$newinfo->save();
+        return response()->json('Finalizado', 200);
+
     }
 
     /**

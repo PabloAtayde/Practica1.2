@@ -43,3 +43,9 @@ Route::get('publicacion/{publicacion_id}/comentario/{id?}','ComentariosControlle
 ->where( ['id','[0-9]+','publicacion_id','[0-9]+']);
 Route::get('personas/{persona_id}/publicaciones/{publicacion_id}/comentarios/{id?}', 'ComentariosController@personPubliComent')->where( ['publicacion_id','[0-9]+','id','[0-9]+','persona_id','[0-9]+']);
 Route::get('comentarios/publicaciones/personas', 'ComentariosController@showalll');
+Route::get('usuarioregistro/{nickname?}/{password?}/{persona_id?}','UsuariosController@index')
+->where([
+'nickname'=>'[A-Z,a-z]+',
+'password'=>'[A-Z,a-z]+',
+"email"=>
+'persona_id'=>'[0-9]+']);

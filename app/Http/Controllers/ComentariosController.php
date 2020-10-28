@@ -19,6 +19,7 @@ class ComentariosController extends Controller
         $newinfo->titulo = $titulo;
         $newinfo->cuerpo = $cuerpo;
         $newinfo->publicacion_id = $publicacion_id;
+        $newinfo->usuario_id = $usuario_id;
 
 
         $newinfo->save();

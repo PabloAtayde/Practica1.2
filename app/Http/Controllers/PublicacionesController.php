@@ -18,7 +18,7 @@ class PublicacionesController extends Controller
 
         $newinfo->titulo = $titulo;
         $newinfo->cuerpo = $cuerpo;
-        $newinfo->persona_id = $persona_id;
+        $newinfo->usuario_id = $usuario_id;
 
 
         $newinfo->save();
