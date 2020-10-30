@@ -2,10 +2,14 @@
 
 namespace App;
 
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
+use Laravel\Sanctum\HasApiTokens;
 
-class Usuarios extends Model
+class Usuarios extends Authenticatable
 {
+    use HasApiTokens,Notifiable;
     public function publicaciones(){
         return $this->hasmany('App\Publicaciones');
 
@@ -15,5 +19,8 @@ class Usuarios extends Model
     }
     public function personas(){
         return $this->belongsto('App\Personas');
+    }
+    public function roles(){
+        return $this->belongsto('App\Roles');
     }
 }

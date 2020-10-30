@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Route;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
-
+Route::middleware('comprobar.rol')->group(function () {
 Route::get('personas/{id?}','PersonasController@show')->where('id','[0-9]+')->name('ruta');
 Route::get('personaRegistro','PersonasController@index')->middleware('check.edad');
 Route::put('persona/updatenombre/{id}/{nombre}','PersonasController@updatenombre')->where(['id','[0-9]+',
@@ -22,6 +22,17 @@ Route::delete('persona/delete/{id}','PersonasController@destroy');
 Route::put('publicacion/updatetitulo/{id}/{titulo}','PublicacionesController@updatetitulo')->where(['id','[0-9]+',
 'titulo','[A-z]+']);
 Route::get('publicacionesshow/{id?}','PublicacionesController@showme')->where('id','[0-9]+')->name('rutapublicaciones');
+Route::get('persona/{persona_id}/comentario/{id?}','ComentariosController@consulPerson')
+->where( ['id','[0-9]+','persona_id','[0-9]+']);
+Route::get('publicacion/{publicacion_id}/comentario/{id?}','ComentariosController@comentPubli')
+->where( ['id','[0-9]+','publicacion_id','[0-9]+']);
+Route::get('personas/{persona_id}/publicaciones/{publicacion_id}/comentarios/{id?}', 'ComentariosController@personPubliComent')->where( ['publicacion_id','[0-9]+','id','[0-9]+','persona_id','[0-9]+']);
+Route::get('comentarios/publicaciones/personas', 'ComentariosController@showalll');
+Route::get('index/usuario', "UsuariosController@index");
+});
+
+
+Route::middleware('auth:sanctum')->group(function () {
 Route::get('publicacionregistro/{titulo?}/{cuerpo?}/{persona_id?}','PublicacionesController@index')
 ->where([
 'titulo'=>'[A-Z,a-z]+',
@@ -37,15 +48,8 @@ Route::get('comentariosregistro/{titulo?}/{cuerpo?}/{publicacion_id?}','Comentar
 Route::put('comentarios/updatetitulo/{id}/{titulo}','ComentariosController@updatetitulo')->where(['id','[0-9]+',
 'titulo','[A-z]+']);
 Route::delete('comentarios/delete/{id}','ComentariosController@destroy');
-Route::get('persona/{persona_id}/comentario/{id?}','ComentariosController@consulPerson')
-->where( ['id','[0-9]+','persona_id','[0-9]+']);
-Route::get('publicacion/{publicacion_id}/comentario/{id?}','ComentariosController@comentPubli')
-->where( ['id','[0-9]+','publicacion_id','[0-9]+']);
-Route::get('personas/{persona_id}/publicaciones/{publicacion_id}/comentarios/{id?}', 'ComentariosController@personPubliComent')->where( ['publicacion_id','[0-9]+','id','[0-9]+','persona_id','[0-9]+']);
-Route::get('comentarios/publicaciones/personas', 'ComentariosController@showalll');
-Route::get('usuarioregistro/{nickname?}/{password?}/{persona_id?}','UsuariosController@index')
-->where([
-'nickname'=>'[A-Z,a-z]+',
-'password'=>'[A-Z,a-z]+',
-"email"=>
-'persona_id'=>'[0-9]+']);
+});
+
+Route::post('registrar/usuario', 'UsuariosController@registro');
+Route::post('login/usuario', 'UsuariosController@login');
+Route::delete('logout/usuario', 'UsuariosController@logOut');
